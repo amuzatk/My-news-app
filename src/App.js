@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import News from "./components/News";
+import NewsDetail from "./components/NewsDetail";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Skeleton from "react-loading-skeleton";
+import { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SkeletonTheme baseColor="rgb(75, 72, 225)" highlightColor="#444">
+      <Router>
+        <Switch>
+          {<Route path="/" exact component={News} /> || <Skeleton count={12} />}
+          <Route path="/:id" component={NewsDetail} />
+        </Switch>
+      </Router>
+    </SkeletonTheme>
   );
 }
 
